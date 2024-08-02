@@ -10,7 +10,8 @@ The agent represents a automotive showroom agent and helps with your queries abo
 - Text to Speech: Convert text back to speech using gTTS.
 - Frontend Design: Design the frontend interface using Streamlit.
 
-- 
+## Features
+This is just to showcase what I could pull together in a few weaks. There is a cleaner way to build this with Langgraph and Im learning the best practices
 
 ## Installation
 
@@ -42,5 +43,6 @@ The agent represents a automotive showroom agent and helps with your queries abo
     ```bash
     streamlit run src/app.py
     ```
-   
+## Actively looking out for  a job
+Hire me!!
 
