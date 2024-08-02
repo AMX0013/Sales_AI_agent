@@ -17,7 +17,7 @@ This is just to showcase what I could pull together in a few weaks. There is a c
 
 1. Clone the repository:
     ```bash
-    git clone 
+    git clone https://github.com/AMX0013/Sales_AI_agent.git
    
 2. Navigate to the project directory:
     ```bash
