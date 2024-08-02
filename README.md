@@ -1,21 +1,22 @@
-# AI-Voice-Assistant
-Welcome to the AI Voice Assistant project! This assistant can start conversations, transcribe audio to text, 
-generate responses, and convert text back to speech, all while showcasing a sleek frontend interface. It serves as a 
-complement to the concepts discussed in the accompanying [YouTube video](https://youtu.be/OqoNkqAsl2Q), offering a 
-practical implementation  of the discussed techniques.
+# Sales_AI_Agent
+This is a project that i started out to help a VC build a AI agent who communicates through audio only
+The agent represents a automotive showroom agent and helps with your queries about your next car. (Watch out, it's pretty realistic and will try to sell you the pricier one!!)
 
 ## Features
 - Conversation Starter: Begin a conversation with the AI assistant.
 - Audio to Text: Transcribe audio to text using an OpenAI model.
 - Fast Inference: Generate responses quickly with Groq.
+- SQL Agent: Generates SQL query to query the PostgreSQL instance to retrieve top_k records ordered by price, desc. Then create the response
 - Text to Speech: Convert text back to speech using gTTS.
 - Frontend Design: Design the frontend interface using Streamlit.
+
+- 
 
 ## Installation
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/Eduardovasquezn/ai-voice-assistant.git
+    git clone 
    
 2. Navigate to the project directory:
     ```bash
@@ -43,9 +44,3 @@ practical implementation  of the discussed techniques.
     ```
    
 
-### Learn More
- 
-Don't forget to check out the video, like, comment, and subscribe for more advanced tutorials!
-
-If you found the content helpful, consider subscribing to my 
-[YouTube channel](https://www.youtube.com/channel/UCYZ_si4TG801SAuLrNl-v-g?sub_confirmation=1) to support me.
