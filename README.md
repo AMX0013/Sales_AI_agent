@@ -19,16 +19,13 @@ This is just to showcase what I could pull together in a few weaks. There is a c
     ```bash
     git clone https://github.com/AMX0013/Sales_AI_agent.git
    
-2. Navigate to the project directory:
-    ```bash
-    cd ai-voice-assistant
-    ```
-3. Create and activate virtual environment:
+
+2. Create and activate virtual environment:
     ```bash
     python -m venv venv
     venv/Scripts/activate
     ```
-4. Install the required libraries:
+3. Install the required libraries:
     ```bash
     pip install -r requirements.txt
     ```
