@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "connectString": "postgres://quttijja:KjjvG7DKV-9rYcrmM7eKi16TlSAmPN3D@lallah.db.elephantsql.com/quttijja",
+            "name": "AutoDB"
+        }
+    ]
+}
