@@ -5,20 +5,33 @@ import streamlit as st
 from langchain.memory import ConversationBufferMemory
 
 from utils import record_audio_chunk, transcribe_audio, play_text_to_speech, load_whisper
-from agent import get_response_llm
+from graph import create_graphflow
 
 chunk_file = 'temp_audio_chunk.wav'
+
+
+
 
 model = load_whisper()
 def main():
     st.markdown('<h1 style="color: darkblue;">AI Voice Assistant️</h1>', unsafe_allow_html=True)
+    # configure the printing of the chat history ?
+    
+    graph = create_graphflow()
+    
+    import uuid 
+    _printed = set()
+    thread_id = str(uuid.uuid4())
 
-    memory = ConversationBufferMemory(memory_key="chat_history")
+    config = {
+        "configurable": {
+            # Checkpoints are accessed by thread_id
+            "thread_id": thread_id,
+        }
+    }
+    
 
     if st.button("Enquire Now!"):
-        
-        response_llm = get_response_llm(user_question="Hi", memory=memory)
-        play_text_to_speech(text=response_llm)
         
         while True:
             # Audio Stream Initialization
@@ -37,8 +50,10 @@ def main():
                     unsafe_allow_html=True)
 
                 os.remove(chunk_file)
-
-                response_llm = get_response_llm(user_question=text, memory=memory)
+                
+                msg = {"messages": ("user", text)}
+                messages = graph.invoke(msg,config)
+                response_llm = messages['messages'][-1].content
                 
                 st.markdown(
                     f'<div style="background-color: #f0f0f0; padding: 10px; border-radius: 5px;">AI Assistant 🤖: {response_llm}</div>',
