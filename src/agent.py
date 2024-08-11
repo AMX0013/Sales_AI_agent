@@ -22,7 +22,7 @@ def load_llm():
     
     load_dotenv()
     groq_api_key = os.getenv("GROQ_API_KEY")
-    chat_groq = ChatGroq(temperature=0.8, model_name="llama3-8b-8192", groq_api_key=groq_api_key)
+    chat_groq = ChatGroq(temperature=1, model_name="llama3-8b-8192", groq_api_key=groq_api_key)
     return chat_groq
 
 def load_db():

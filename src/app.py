@@ -4,13 +4,10 @@ import pyaudio
 import streamlit as st
 from langchain.memory import ConversationBufferMemory
 
-from utils import record_audio_chunk, transcribe_audio, play_text_to_speech, load_whisper
+from utils import record_audio_chunk, transcribe_audio, play_text_to_speech, load_whisper #, deepgram_tts, record_audio_until_silent
 from graph import create_graphflow
 
 chunk_file = 'temp_audio_chunk.wav'
-
-
-
 
 model = load_whisper()
 def main():
@@ -40,7 +37,7 @@ def main():
             stream = audio.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True, frames_per_buffer=1024)
 
             # Record and save audio chunk
-            record_audio_chunk(audio, stream)
+            record_audio_chunk(audio, stream, chunk_length=8)
 
             text = transcribe_audio(model, chunk_file)
             print(text)
@@ -53,6 +50,7 @@ def main():
                 
                 msg = {"messages": ("user", text)}
                 messages = graph.invoke(msg,config)
+                print(messages)
                 response_llm = messages['messages'][-1].content
                 
                 st.markdown(

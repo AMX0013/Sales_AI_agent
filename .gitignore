@@ -1,4 +1,6 @@
 .env
 *.wav
 *.ipynb
+*.json
 .venv
+*.pkl

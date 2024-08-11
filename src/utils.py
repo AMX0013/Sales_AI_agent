@@ -1,11 +1,12 @@
 import os
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
 import wave
 import pyaudio
 from scipy.io import wavfile
 import numpy as np
-
+from pydub import AudioSegment
+from pydub.playback import play
 import whisper
 
 from gtts import gTTS
@@ -56,6 +57,9 @@ def record_audio_chunk(audio, stream, chunk_length=5):
         print(f"Error while reading audio file: {e}")
 
 
+
+
+
 def load_whisper():
     model = whisper.load_model("base")
     return model
@@ -74,7 +78,7 @@ def transcribe_audio(model, file_path):
 
 
 
-def play_text_to_speech(text, language='en', slow=False):
+def play_text_to_speech(text, language='en', slow=False, speed_factor=1.3):
     # Generate text-to-speech audio from the provided text
     tts = gTTS(text=text, lang=language, slow=slow)
 
@@ -82,6 +86,38 @@ def play_text_to_speech(text, language='en', slow=False):
     temp_audio_file = "temp_audio.mp3"
     tts.save(temp_audio_file)
 
+    # Load the audio file with pydub
+    audio = AudioSegment.from_file(temp_audio_file)
+
+    # Adjust the speed (playback speed)
+    fast_audio = audio.speedup(playback_speed=speed_factor)
+
+    # Play the adjusted audio
+    play(fast_audio)
+
+    # Clean up: Remove the temporary audio file
+    os.remove(temp_audio_file)
+    
+    
+def deepgram_tts(text):
+    from deepgram import (
+    DeepgramClient,
+    SpeakOptions,
+    )
+    load_dotenv()
+    deepgram = DeepgramClient(api_key=os.getenv("DEEPGRAM_API_KEY"))
+    # STEP 2: Configure the options (such as model choice, audio configuration, etc.)
+    options = SpeakOptions(
+        model="aura-asteria-en",
+        encoding="linear16",
+        container="wav"
+    )
+    SPEAK_OPTIONS = {"text": text}
+    
+    temp_audio_file = "temp_audio.mp3"
+    response = deepgram.speak.v("1").save(temp_audio_file, SPEAK_OPTIONS, options)
+    print(response.to_json(indent=4))
+    
     # Initialize the pygame mixer for audio playback
     pygame.mixer.init()
 
@@ -93,7 +129,7 @@ def play_text_to_speech(text, language='en', slow=False):
 
     # Wait until the audio playback finishes
     while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(10)  # Control the playback speed
+        pygame.time.Clock().tick(1)  # Control the playback speed
 
     # Stop the audio playback
     pygame.mixer.music.stop()
@@ -101,3 +137,5 @@ def play_text_to_speech(text, language='en', slow=False):
     # Clean up: Quit the pygame mixer and remove the temporary audio file
     pygame.mixer.quit()
     os.remove(temp_audio_file)
+    
+    
